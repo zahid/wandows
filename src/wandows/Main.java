@@ -73,6 +73,7 @@ class Main {
 			case Token.U:
 				break;
 			case Token.WC:
+				new Wc(arguments);
 				break;
 			default:
 				System.out.println("`" + command + "` is not recognized as an internal or external command, operable program or batch file.");
