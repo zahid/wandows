@@ -1,4 +1,4 @@
-package wandows;
+package windix;
 public class MyCal {
 	public static void main(String[] args) {
 		int x = Integer.parseInt(args[0]);
