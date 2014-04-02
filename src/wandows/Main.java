@@ -1,23 +1,29 @@
 package wandows;
 //import java.io.*;
+import java.io.IOException;
 import java.util.*;
-
-import windix.Cal;
+import windix.*;
 
 class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		System.out.println("Hello, world!");
 		Scanner keyboard = new Scanner(System.in);
+		
 		while (true) {
 			System.out.print("PROMPT\\>");
-			String command = keyboard.next();
-			String arguments = keyboard.nextLine();
+			String[] input = keyboard.nextLine().split(" ");
+			String[] arguments = new String[input.length-1];
+			String command = input[0];
 			Token token = new Token(command);
+			
+			for(int i=1; i<input.length; i++)
+				arguments[i-1] = input[i];
+			
 			switch (token.kind) {
 			case Token.BIGGER:
 				break;
 			case Token.CAL:
-				new Cal(arguments);
+				//new Cal(arguments);
 				break; // This is just a hint. You need to change the class Cal
 						// to displays the current month calendar.
 			case Token.CAT:
@@ -54,6 +60,7 @@ class Main {
 			case Token.MKDIR:
 				break;
 			case Token.MV:
+				new Mv(arguments);
 				break;
 			case Token.PWD:
 				break;
@@ -68,7 +75,7 @@ class Main {
 			case Token.WC:
 				break;
 			default:
-				System.out.println("Wrong command.");
+				System.out.println("`" + command + "` is not recognized as an internal or external command, operable program or batch file.");
 			}
 		}
 	}
