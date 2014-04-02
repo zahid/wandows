@@ -1,3 +1,4 @@
+package wandows;
 //import java.io.*;
 import java.util.*;
 

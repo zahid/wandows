@@ -1,3 +1,4 @@
+package wandows;
 public class Token {
 	public int kind;
 
