@@ -1,23 +1,22 @@
 package wandows;
-//import java.io.*;
-import java.util.*;
 
-import windix.Cal;
+import java.util.Scanner;
 
 class Main {
+	
+	private Doer doer;
+	
 	public static void main(String[] args) {
-		System.out.println("Hello, world!");
 		Scanner keyboard = new Scanner(System.in);
 		while (true) {
 			System.out.print("PROMPT\\>");
 			String command = keyboard.next();
-			String arguments = keyboard.nextLine();
 			Token token = new Token(command);
 			switch (token.kind) {
 			case Token.BIGGER:
 				break;
 			case Token.CAL:
-				new Cal(arguments);
+				Doer.doThis(command);
 				break; // This is just a hint. You need to change the class Cal
 						// to displays the current month calendar.
 			case Token.CAT:
