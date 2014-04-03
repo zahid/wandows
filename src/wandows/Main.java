@@ -1,8 +1,7 @@
 package wandows;
-//import java.io.*;
 import java.io.IOException;
 import java.util.*;
-import windix.*;
+import commandows.*;
 
 class Main {
 	public static void main(String[] args) throws IOException {
