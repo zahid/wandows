@@ -48,6 +48,10 @@ public class Wc {
 	public static void readFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		
+		// if file does not exist, give it a chance with the absolute path specified (since user may specify relative path instead)
+		if(!file.exists())
+			file = new File(System.getProperty("user.dir") + fileName);
+		
 		if(file.exists() && !file.isDirectory()) {
 			try {
 				byte[] fileBytes = new byte[(int)file.length()];

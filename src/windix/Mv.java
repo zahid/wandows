@@ -20,6 +20,10 @@ public class Mv {
 			toFile = args[1];
 			File file = new File(fromFile);
 			
+			// if file does not exist, give it a chance with the absolute path specified (since user may specify relative path instead)
+			if(!file.exists())
+				file = new File(System.getProperty("user.dir") + fromFile);
+			
 			if(file.exists() && !file.isDirectory()) {
 				fileBytes = new byte[(int)file.length()];
 				
@@ -28,9 +32,9 @@ public class Mv {
 				writeFileFromBytes();
 				deleteOldFile();
 			} else
-				System.out.println("Error: file not accessible or is a directory");
+				System.out.println("mv: " + fromFile + ": file not accessible or is a directory");
 		} else {
-			System.out.println("Error: parameters incorrect");
+			System.out.println("mv: incorrect parameters specified");
 		}
 	}
 	
@@ -55,7 +59,7 @@ public class Mv {
 			// set the file pointer at 0 position
 			raf.seek(0);
 		} catch (IOException e) {
-			System.out.println("Cannot move file: " + e);
+			System.out.println("mv: " + e);
 		}
 	}
 	
@@ -70,7 +74,7 @@ public class Mv {
 			// read data into bytes array
 			raf.read(fileBytes);
 		} catch (IOException e) {
-			System.err.println("Cannot read file: " + e);
+			System.err.println("mv: " + e);
 		}
 	}
 }
