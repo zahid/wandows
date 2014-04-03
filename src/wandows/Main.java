@@ -63,6 +63,7 @@ class Main {
 				new Mv(arguments);
 				break;
 			case Token.PWD:
+				new Pwd();
 				break;
 			case Token.RM:
 				break;
