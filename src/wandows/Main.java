@@ -24,6 +24,7 @@ class Main {
 				new Cal();
 				break; 
 			case Token.CAT:
+				new Cat(arguments);
 				break;
 			case Token.ATTRIB:
 				break;
