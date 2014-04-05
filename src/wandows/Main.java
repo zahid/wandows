@@ -5,7 +5,6 @@ import commandows.*;
 
 class Main {
 	public static void main(String[] args) throws IOException {
-		System.out.println("Hello, world!");
 		Scanner keyboard = new Scanner(System.in);
 		
 		while (true) {
@@ -22,9 +21,8 @@ class Main {
 			case Token.BIGGER:
 				break;
 			case Token.CAL:
-				//new Cal(arguments);
-				break; // This is just a hint. You need to change the class Cal
-						// to displays the current month calendar.
+				new Cal();
+				break; 
 			case Token.CAT:
 				break;
 			case Token.ATTRIB:
