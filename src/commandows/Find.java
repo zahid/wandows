@@ -3,14 +3,16 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Find {
-    public static void main(String[] args) {
-    	Scanner keyboard = new Scanner(System.in);
-    	String searchTerm = keyboard.nextLine();
+	public static int matches = 0;
+	
+    public Find(String[] args) {
+    	String searchTerm = args[0];
     	
-        walk("c:\\", searchTerm);
+        findRecursive("c:\\", searchTerm);
+        System.out.println("Search for `" + searchTerm + "` yielded " + matches + " results.");
     }
     
-    public static void walk(String path, String searchTerm) {
+    public static void findRecursive(String path, String searchTerm) {
         File root = new File(path);
         File[] list = root.listFiles();
 
@@ -20,10 +22,12 @@ public class Find {
         	File file = list[i];
         	
             if (file.isDirectory()) {
-                walk(file.getAbsolutePath(), searchTerm);
+            	findRecursive(file.getAbsolutePath(), searchTerm);
             } else {
-            	if(file.getName().equals(searchTerm))
-            		System.out.println("Match: " + file.getAbsoluteFile());
+            	if(file.getName().equals(searchTerm)) {
+            		System.out.println(file.getAbsoluteFile());
+            		matches++;
+            	}
             }
         }
     }
