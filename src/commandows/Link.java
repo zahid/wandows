@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Link {
+public class Link {// link C:/Users/Josh/Desktop/thing.txt C:/Users/Josh/Desktop/stuff.txt
 
 	public Link(String[] args) {
 		String fileName = args[0];
@@ -23,9 +23,9 @@ public class Link {
 			
 			try {
 			    Files.createLink(newLink, existingFile);
-			} catch (IOException x) {
-			    System.err.println(x);
-			} catch (UnsupportedOperationException x) {
+			} catch (IOException e) {
+			    System.out.println("link: `" + fileName + "`: " + e);
+			} catch (UnsupportedOperationException e) {
 			    // some file systems do not support hard links
 			    System.out.println("link: this operating system does not allow hard links");
 			}
