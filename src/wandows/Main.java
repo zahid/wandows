@@ -43,12 +43,15 @@ class Main {
 			case Token.FILE:
 				break;
 			case Token.FIND:
+				new Find(arguments);
 				break;
 			case Token.GREP:
+				new Grep(arguments);
 				break;
 			case Token.HEAD:
 				break;
 			case Token.LINK:
+				new Link(arguments);
 				break;
 			case Token.LS:
 				break;
