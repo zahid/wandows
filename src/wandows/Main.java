@@ -29,6 +29,7 @@ class Main {
 			case Token.ATTRIB:
 				break;
 			case Token.CP:
+				new Cp(arguments);
 				break;
 			case Token.CUT:
 				break;
