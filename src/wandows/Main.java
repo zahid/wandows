@@ -27,6 +27,7 @@ class Main {
 				new Cat(arguments);
 				break;
 			case Token.ATTRIB:
+				new Attrib(arguments);
 				break;
 			case Token.CP:
 				new Cp(arguments);
