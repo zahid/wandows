@@ -10,8 +10,6 @@ import java.io.OutputStream;
 public class Cp {
 	public Cp(String[] args) {	
 	 
-		System.out.println(args);
-		
     	InputStream inStream = null;
 		OutputStream outStream = null;
 	 
