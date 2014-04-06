@@ -36,6 +36,7 @@ class Main {
 			case Token.D:
 				break;
 			case Token.ECHO:
+				new Echo(arguments);
 				break;
 			case Token.EXIT:
 				System.exit(0);
