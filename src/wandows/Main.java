@@ -44,6 +44,7 @@ class Main {
 				System.exit(0);
 				break;
 			case Token.FILE:
+				new File(arguments);
 				break;
 			case Token.FIND:
 				new Find(arguments);
