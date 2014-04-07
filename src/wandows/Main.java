@@ -33,6 +33,7 @@ class Main {
 				new Cp(arguments);
 				break;
 			case Token.CUT:
+				new Cut(arguments);
 				break;
 			case Token.D:
 				break;
