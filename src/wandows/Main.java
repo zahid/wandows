@@ -77,6 +77,7 @@ class Main {
 			case Token.RMDIR:
 				break;
 			case Token.TAIL:
+				new Tail(arguments);
 				break;
 			case Token.U:
 				break;
