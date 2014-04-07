@@ -53,6 +53,7 @@ class Main {
 				new Grep(arguments);
 				break;
 			case Token.HEAD:
+				new Head(arguments);
 				break;
 			case Token.LINK:
 				new Link(arguments);
