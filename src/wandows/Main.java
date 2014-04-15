@@ -24,12 +24,10 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     public static JTextArea typingArea;
     
     static final String newline = System.getProperty("line.separator");
-    public static int uneditableMark = 10; // point at which text is uneditable
     public static String textHistory = ""; // history of text that cannot be erased next time
      
      
-   public static  CaretListenerLabel caretListenerLabel =
-    	    new CaretListenerLabel(); // NOTE: this is still broken...
+   public static  CaretListenerLabel caretListenerLabel = new CaretListenerLabel(); 
      
 
  	public static void main(String[] args) throws IOException {
@@ -39,7 +37,6 @@ public class Main extends JFrame implements KeyListener, ActionListener {
  	}
      
      public static void runCommand(String cmd) throws IOException {
-    		prompt();
 			String[] input = cmd.trim().split(" ");
 			String[] arguments = new String[input.length-1];
 			String command = input[0];
@@ -53,52 +50,41 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				break;
 			case Token.CAL:
 				new Cal();
-				prompt();
 				break; 
 			case Token.CAT:
 				new Cat(arguments);
-				prompt();
 				break;
 			case Token.ATTRIB:
 				new Attrib(arguments);
-				prompt();
 				break;
 			case Token.CP:
 				new Cp(arguments);
-				prompt();
 				break;
 			case Token.CUT:
 				new Cut(arguments);
-				prompt();
 				break;
 			case Token.D:
 				break;
 			case Token.ECHO:
 				new Echo(arguments);
-				prompt();
 				break;
 			case Token.EXIT:
 				System.exit(0);
 				break;
 			case Token.FILE:
 				new File(arguments);
-				prompt();
 				break;
 			case Token.FIND:
 				new Find(arguments);
-				prompt();
 				break;
 			case Token.GREP:
 				new Grep(arguments);
-				prompt();
 				break;
 			case Token.HEAD:
 				new Head(arguments);
-				prompt();
 				break;
 			case Token.LINK:
 				new Link(arguments);
-				prompt();
 				break;
 			case Token.LS:
 				break;
@@ -110,7 +96,6 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				break;
 			case Token.MV:
 				new Mv(arguments);
-				prompt();
 				break;
 			case Token.PWD:
 				new Pwd();
@@ -121,35 +106,33 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				break;
 			case Token.TAIL:
 				new Tail(arguments);
-				prompt();
 				break;
 			case Token.U:
 				break;
 			case Token.WC:
 				new Wc(arguments);
-				prompt();
 				break;
 			default:
 				System.out.println(command);
-				out("\n`" + command + "` is not recognized as an internal or external command, operable program or batch file.");
+				outln("`" + command + "` is not recognized as an internal or external command, operable program or batch file.");
 			}
 			
+			prompt();
      }
      
      public static void prompt() {
-    	 out("\nPROMPT//>");
-    	 
+    	 outln("PROMPT//>");
      }
      
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        
-        if(typingArea.getCaretPosition() < uneditableMark+1) {
+		
+        if(typingArea.getCaretPosition() < CaretListenerLabel.uneditableMark+1) {
         	// cannot erase before character, disable backspace
         	typingArea.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
         } else if(keyCode == 10) {
         	// enter key pressed, find and run command
-        	String command = typingArea.getText().substring(uneditableMark, typingArea.getText().length());
+        	String command = typingArea.getText().substring(CaretListenerLabel.uneditableMark, typingArea.getText().length());
         	
         	try {
 				runCommand(command);
@@ -163,12 +146,34 @@ public class Main extends JFrame implements KeyListener, ActionListener {
         }
     }
     
+    /* prints without a line break */
     public static void out(String text) {
+    	// prevent caret controls while the process is executing
+    	CaretListenerLabel.isRunning = true;
+    	
+    	// add the text to the uneditable history
     	String updatedText = typingArea.getText() + text;
     	typingArea.setText(updatedText);
     	textHistory = updatedText;
-    	uneditableMark = typingArea.getText().length();
-    	CaretListenerLabel.uneditableMark = uneditableMark;
+    	CaretListenerLabel.uneditableMark = textHistory.length();
+
+    	// re-enable caret controls
+    	CaretListenerLabel.isRunning = false;
+    }
+    
+    /* prints with a line break */
+    public static void outln(String text) {
+    	// prevent caret controls while the process is executing
+    	CaretListenerLabel.isRunning = true;
+    	
+    	// add the text to the uneditable history
+    	String updatedText = typingArea.getText() + "\n" + text;
+    	typingArea.setText(updatedText);
+    	textHistory = updatedText;
+    	CaretListenerLabel.uneditableMark = textHistory.length();
+
+    	// re-enable caret controls
+    	CaretListenerLabel.isRunning = false;
     }
     
    private void addComponentsToPane() {
@@ -180,7 +185,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
         
        getContentPane().add(scrollPane, BorderLayout.CENTER);
        
-       out("PROMPT//>");
+       prompt();
    }
    
    public Main() {
