@@ -1,6 +1,8 @@
 package wandows;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.*;
 import java.io.IOException;
 import javax.swing.*;
@@ -34,7 +36,15 @@ public class Main extends JFrame implements KeyListener, ActionListener {
  		Main gui = new Main();
 		caretListenerLabel.txtArea = typingArea;
 		typingArea.addCaretListener(caretListenerLabel);
+		
+		// set styling info
+		Font font = new Font("Courier New", Font.BOLD, 14);
+		typingArea.setFont(font);
+		typingArea.setForeground(Color.WHITE);
+		typingArea.setCaretColor(Color.WHITE);
+		typingArea.setBackground(Color.BLACK);
 		typingArea.putClientProperty("caretWidth", 8);
+		typingArea.putClientProperty("caretColor", 8);
  	}
      
      public static void runCommand(String cmd) throws IOException {
@@ -122,7 +132,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
      }
      
      public static void prompt() {
-    	 outln("PROMPT//> ");
+    	 outln("PROMPT//>");
      }
      
     public void keyPressed(KeyEvent e) {
@@ -186,7 +196,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
        typingArea.addKeyListener(this);
        
        JScrollPane scrollPane = new JScrollPane(typingArea);
-       scrollPane.setPreferredSize(new Dimension(375, 125));
+       scrollPane.setPreferredSize(new Dimension(650, 300));
         
        getContentPane().add(scrollPane, BorderLayout.CENTER);
        
