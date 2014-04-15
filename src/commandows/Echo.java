@@ -8,7 +8,6 @@ public class Echo {
 		if(args.length > 0)
 			for(int i=0; i<args.length; i++)
 				strOutput += args[i].trim() + " ";
-		
 		System.out.println(strOutput.trim());
 	}
 	
