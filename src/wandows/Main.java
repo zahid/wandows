@@ -34,6 +34,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
  		Main gui = new Main();
 		caretListenerLabel.txtArea = typingArea;
 		typingArea.addCaretListener(caretListenerLabel);
+		typingArea.putClientProperty("caretWidth", 8);
  	}
      
      public static void runCommand(String cmd) throws IOException {
@@ -121,7 +122,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
      }
      
      public static void prompt() {
-    	 outln("PROMPT//>");
+    	 outln("PROMPT//> ");
      }
      
     public void keyPressed(KeyEvent e) {
@@ -168,12 +169,16 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     	
     	// add the text to the uneditable history
     	String updatedText = typingArea.getText() + "\n" + text;
+    	updatedText = updatedText.trim();//updatedText.substring(0,updatedText.lastIndexOf('\n'));;
+    	
+    	// update the text
     	typingArea.setText(updatedText);
     	textHistory = updatedText;
     	CaretListenerLabel.uneditableMark = textHistory.length();
-
+    	
     	// re-enable caret controls
     	CaretListenerLabel.isRunning = false;
+    	typingArea.setCaretPosition(CaretListenerLabel.uneditableMark);
     }
     
    private void addComponentsToPane() {
