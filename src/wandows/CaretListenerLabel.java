@@ -4,7 +4,7 @@ import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
-class CaretListenerLabel extends JTextArea implements CaretListener {
+public class CaretListenerLabel extends JTextArea implements CaretListener {
 	public static int uneditableMark = 0;
 	public JTextArea txtArea;
 	public static boolean isRunning = false;
