@@ -10,12 +10,10 @@ public class Wc {
 	public static boolean[] flags = new boolean[3]; // -l=0, -m=1, -w=2
 	public static int[] sizes = new int[3]; // -l=0, -m=1, -w=2
 	
-	//wc -l -m -w C:/Users/Josh/Desktop/test.txt C:/Users/Josh/Desktop/test.txt C:/Users/Josh/Desktop/tes3t.txt
-	
 	public Wc(String[] args) throws IOException {
 		for(int i=0; i<args.length; i++) {
 			if(args[i].substring(0, 1).equals("-")) {
-				// the arg starts with "-" and is therefore a command. which command(s) is the user requesting?
+				// the argument starts with "-" and is therefore a command. which command(s) is the user requesting?
 				
 				switch(args[i].substring(1, 2)) {
 				case "l":
@@ -62,6 +60,7 @@ public class Wc {
 		if(file.exists() && !file.isDirectory()) {
 			try {
 				byte[] fileBytes = new byte[(int)file.length()];
+				@SuppressWarnings("resource")
 				RandomAccessFile raf = new RandomAccessFile(fileName, "r");
 	
 				// read data into bytes array and then convert to String
@@ -80,7 +79,6 @@ public class Wc {
 				}
 				if(flags[2]) {
 					c3 = delimiterCount(fileContents, " ");
-					c3 += delimiterCount(fileContents, "\n");
 					sizes[2] += c3;
 				}
 				
@@ -94,12 +92,26 @@ public class Wc {
 	}
 	
 	public static int delimiterCount(String fileContents, String delimiter) {
-		String[] p = fileContents.split(delimiter);
 		int count = 0;
 		
-		for(int i=0; i<p.length; i++) {
-			if(p[i].replace("\n", "").replace("\t", "").replace(" ", "").length() > 0)
-				count++;
+		// if delimeter is a space, find all words
+		if(delimiter.equals(" ")) {
+			String[] lines = fileContents.split("\n");
+			
+			for(int i=0; i<lines.length; i++) {
+				String[] line = lines[i].replace("\t", "").split(" ");
+				
+				for(int j=0; j<line.length; j++) {
+					if(line[j].trim().length() > 0)
+						count++;
+				}
+			}
+		} else if(delimiter.equals("")) {
+			char[] p = fileContents.toCharArray();
+			count = p.length;
+		} else {
+			String[] p = fileContents.split(delimiter);
+			count = p.length;
 		}
 
 		return count;
