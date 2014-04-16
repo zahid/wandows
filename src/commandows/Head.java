@@ -3,6 +3,8 @@ package commandows;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import wandows.Main;
+
 public class Head {
 	BufferedReader in;
 	private static String filename;
@@ -15,10 +17,10 @@ public class Head {
 			String line;
 			int i = 0;
 		    while((line = in.readLine()) != null && i < 10){
-		        System.out.println(line);
+		    	Main.outln(line);
 		    }
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			Main.outln(e.getMessage());
 		}
 	}
 	

@@ -1,15 +1,19 @@
 package commandows;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+
+import wandows.Main;
 
 
 public class Mv {
 	public static String fromFile;
 	public static String toFile;
-	public static FileLock exclusiveLock ;
+	public static FileLock exclusiveLock;
 	public static byte[] fileBytes;
 	
 	//mv C:/Users/Josh/Desktop/test.txt C:/Users/Josh/Desktop/stuffs/nonsense3.txt
@@ -32,9 +36,9 @@ public class Mv {
 				writeFileFromBytes();
 				deleteOldFile();
 			} else
-				System.out.println("mv: " + fromFile + ": file not accessible or is a directory");
+				Main.outln("mv: " + fromFile + ": file not accessible or is a directory");
 		} else {
-			System.out.println("mv: incorrect parameters specified");
+			Main.outln("mv: incorrect parameters specified");
 		}
 	}
 	
@@ -50,21 +54,25 @@ public class Mv {
 	
 	public static void writeFileFromBytes() {
 		try {
-			// create a new RandomAccessFile with filename test
-			RandomAccessFile raf = new RandomAccessFile(toFile, "rw");
+			// create file if not exists
+			File newFile = new File(toFile);
+			if(!newFile.exists()) {
+				newFile.createNewFile();
+			}
+
+			// write to file
+			FileOutputStream out = new FileOutputStream(newFile);
 			
-			// write bytes to file
-			raf.write(fileBytes);
-			
-			// set the file pointer at 0 position
-			raf.seek(0);
+			out.write(fileBytes);
+			out.close();
 		} catch (IOException e) {
-			System.out.println("mv: " + e);
+			Main.outln("mv: `" + toFile + "`: " + e);
 		}
 	}
 	
 	public static void readFileToBytes() throws IOException {
 		try {
+			@SuppressWarnings("resource")
 			RandomAccessFile raf = new RandomAccessFile(fromFile, "rw");
 			FileChannel ch = raf.getChannel();
 			
@@ -74,7 +82,7 @@ public class Mv {
 			// read data into bytes array
 			raf.read(fileBytes);
 		} catch (IOException e) {
-			System.err.println("mv: " + e);
+			Main.outln("mv: `" + fromFile + "`: " + e);
 		}
 	}
 }
