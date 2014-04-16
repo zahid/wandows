@@ -3,6 +3,7 @@ package commandows;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import wandows.Main;
 
 public class Wc {
 	public static String[] files = new String[1];
@@ -42,7 +43,7 @@ public class Wc {
 				readFile(files[i]);
 
 		// print totals
-		System.out.println("\t" + sizes[0] + "\t" + sizes[1] + "\t" + sizes[2] + "\ttotal");
+		Main.outln("\t" + sizes[0] + "\t" + sizes[1] + "\t" + sizes[2] + "\ttotal");
 	}
 	
 	public static void readFile(String fileName) throws IOException {
@@ -83,7 +84,7 @@ public class Wc {
 				System.err.println("Cannot read file: " + e);
 			}
 		} else {
-			System.out.println("wc: " + fileName + ": no such file or directory.");
+			Main.outln("wc: " + fileName + ": no such file or directory.");
 		}
 	}
 	
