@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import wandows.Main;
+
 public class Grep {
 	public static char[] match;
 	public static String fileData;
@@ -22,10 +24,10 @@ public class Grep {
 			
 			for(int i=0; i<lines.length; i++) {
 				if(searchLine(lines[i]))
-					System.out.println(lines[i]);
+					Main.outln(lines[i]);
 			}
 		} else {
-			System.out.println("grep: " + args[1] + ": file not accessible or is a directory");
+			Main.outln("grep: " + args[1] + ": file not accessible or is a directory");
 		}
 	}
 	
@@ -48,6 +50,7 @@ public class Grep {
 	
 	public static String readFileToString(String fileName) throws IOException {
 		try {
+			@SuppressWarnings("resource")
 			RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
 			File file = new File(fileName);
 			byte[] fileBytes = new byte[(int)file.length()];
@@ -58,7 +61,7 @@ public class Grep {
 			// read data into string
 			return new String(fileBytes);
 		} catch (IOException e) {
-			System.err.println("grep: " + e);
+			Main.outln("grep: " + e);
 			return "";
 		}
 	}

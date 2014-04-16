@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import wandows.Main;
+
 public class Cp {
 	public Cp(String[] args) {	
 	 
@@ -29,7 +31,7 @@ public class Cp {
     	    }
     	    inStream.close();
     	    outStream.close();
-    	    System.out.println("File is copied successful!");
+    	    Main.outln("File is copied successful!");
     	} catch(IOException e){
     		e.printStackTrace();
     	}

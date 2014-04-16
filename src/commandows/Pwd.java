@@ -1,7 +1,9 @@
 package commandows;
 
+import wandows.Main;
+
 public class Pwd {
 	public Pwd() {
-		System.out.println(System.getProperty("user.dir"));
+		Main.outln(System.getProperty("user.dir"));
 	}
 }

@@ -1,6 +1,7 @@
 package commandows;
 import java.io.File;
-import java.util.Scanner;
+
+import wandows.Main;
 
 public class Find {
 	public static int matches = 0;
@@ -25,7 +26,7 @@ public class Find {
             	findRecursive(file.getAbsolutePath(), searchTerm);
             } else {
             	if(file.getName().equals(searchTerm)) {
-            		System.out.println(file.getAbsoluteFile());
+            		Main.outln(file.getAbsoluteFile().getName());
             		matches++;
             	}
             }

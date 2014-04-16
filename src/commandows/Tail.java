@@ -3,6 +3,8 @@ package commandows;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import wandows.Main;
+
 public class Tail {
 
 	public Tail(String[] args) {
@@ -24,11 +26,11 @@ public class Tail {
 		    	i = lines.length - 10;
 		    }
 		    while(i < lines.length) {
-		    	System.out.println(lines[i]);
+		    	Main.outln(lines[i]);
 		    	i++;
 		    }
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			Main.outln(e.getMessage());
 		}
 	}
 	

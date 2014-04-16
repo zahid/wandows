@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import wandows.Main;
+
 public class Cut {
 	public static String filename;
 	public static Path path;
@@ -35,10 +37,10 @@ public class Cut {
 		    in = new BufferedReader(new FileReader(filename));
 		    String line = "" ;
 		    while((line = in.readLine()) != null){
-		        System.out.println(line.substring(start, end));
+		    	Main.outln(line.substring(start, end));
 		    }
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			Main.outln(e.getMessage());
 		}
 	}
 }
