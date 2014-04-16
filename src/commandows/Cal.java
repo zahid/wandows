@@ -2,11 +2,11 @@ package commandows;
 
 public class Cal {
 	
-	private static long current;
-	private static long days;
-	private static int leapYears;
-	private static int years;
-	private static String calendarOutput;
+	private long current;
+	private long days;
+	private int leapYears;
+	private int years;
+	private String calendarOutput;
 	
 	/* First day of January 2014 */
 	private static int yearStartDay = 3;
