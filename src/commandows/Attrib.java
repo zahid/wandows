@@ -1,10 +1,11 @@
 package commandows;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import wandows.Main;
 
 public class Attrib {
 	public static boolean[] flags = new boolean[4]; // -r=0, -a=1, -s=2, -h=3
@@ -50,28 +51,28 @@ public class Attrib {
 		try {
 			Files.setAttribute(path, "dos:readonly", true);
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			Main.outln(e.getMessage());
 		}
 	}
 	public void setArchiveAttribute() { 
 		try {
 			Files.setAttribute(path, "dos:archive", true);
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			Main.outln(e.getMessage());
 		}
 	}
 	public void setSystemFileAttribute() {
 		try {
 			Files.setAttribute(path, "dos:archive", true);
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			Main.outln(e.getMessage());
 		}
 	}
 	public void setHiddenAttribute() { 
 		try {
 			Files.setAttribute(path, "dos:hidden", true);
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			Main.outln(e.getMessage());
 		}	
 	}
 }
