@@ -16,7 +16,7 @@ public class Mv {
 	public static FileLock exclusiveLock;
 	public static byte[] fileBytes;
 	
-	//mv C:/Users/Josh/Desktop/test.txt C:/Users/Josh/Desktop/stuffs/nonsense3.txt
+	//mv C:/Users/Josh/Desktop/test.txt C:/Users/Josh/Desktop/nonsense3.txt
 	
 	public Mv(String[] args) throws IOException {
 		if(args.length == 2) {
@@ -49,7 +49,13 @@ public class Mv {
 		
 		// delete the old file from the system
 		File file = new File(fromFile);
-		file.delete();
+		
+		// if file does not exist, give it a chance with the absolute path specified (since user may specify relative path instead)
+		if(!file.exists())
+			file = new File(System.getProperty("user.dir") + fromFile);
+		
+		if(!file.delete())
+			Main.outln("mv: `" + file.getAbsolutePath() + "`: could not delete file");
 	}
 	
 	public static void writeFileFromBytes() {
@@ -72,7 +78,6 @@ public class Mv {
 	
 	public static void readFileToBytes() throws IOException {
 		try {
-			@SuppressWarnings("resource")
 			RandomAccessFile raf = new RandomAccessFile(fromFile, "rw");
 			FileChannel ch = raf.getChannel();
 			
@@ -81,6 +86,8 @@ public class Mv {
 
 			// read data into bytes array
 			raf.read(fileBytes);
+			ch.close();
+			raf.close();
 		} catch (IOException e) {
 			Main.outln("mv: `" + fromFile + "`: " + e);
 		}

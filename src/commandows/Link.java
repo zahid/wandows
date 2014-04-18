@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import wandows.Main;
+
 public class Link {// link C:/Users/Josh/Desktop/thing.txt C:/Users/Josh/Desktop/stuff.txt
 
 	public Link(String[] args) {
@@ -24,12 +26,12 @@ public class Link {// link C:/Users/Josh/Desktop/thing.txt C:/Users/Josh/Desktop
 			try {
 			    Files.createLink(newLink, existingFile);
 			} catch (IOException e) {
-			    System.out.println("link: `" + fileName + "`: " + e);
+				Main.outln("link: `" + fileName + "`: " + e);
 			} catch (UnsupportedOperationException e) {
 			    // some file systems do not support hard links
-			    System.out.println("link: this operating system does not allow hard links");
+			    Main.outln("link: this operating system does not allow hard links");
 			}
 		} else
-			System.out.println("link: `" + fileName + "`: file not found");
+			Main.outln("link: `" + fileName + "`: file not found");
 	}
 }
