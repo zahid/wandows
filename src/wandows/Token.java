@@ -35,7 +35,8 @@ public class Token {
 			RMDIR = 21, // rmdir
 			TAIL = 22, // tail
 			U = 23, // u
-			WC = 24; // wc
+			WC = 24, // wc
+			CD = 25; // cd
 
 	private final static String[] spellings = { ">", "cal", "cat", "attrib",
 			"cp", "cut", "d", "echo", "exit", "file", "find", "grep", "head",
