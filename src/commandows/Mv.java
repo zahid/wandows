@@ -2,9 +2,7 @@ package commandows;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 
 import wandows.Main;
@@ -43,10 +41,6 @@ public class Mv {
 	}
 	
 	public static void deleteOldFile() throws IOException {
-		// release the lock
-		if (exclusiveLock != null)
-			exclusiveLock.release();
-		
 		// delete the old file from the system
 		File file = new File(fromFile);
 		
@@ -79,14 +73,9 @@ public class Mv {
 	public static void readFileToBytes() throws IOException {
 		try {
 			RandomAccessFile raf = new RandomAccessFile(fromFile, "rw");
-			FileChannel ch = raf.getChannel();
-			
-			// this locks the first half of the file - exclusive
-			exclusiveLock = ch.lock(0, raf.length(), true);
 
 			// read data into bytes array
 			raf.read(fileBytes);
-			ch.close();
 			raf.close();
 		} catch (IOException e) {
 			Main.outln("mv: `" + fromFile + "`: " + e);
