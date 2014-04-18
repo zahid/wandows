@@ -13,10 +13,10 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 	public static JTextArea typingArea;
 	static final String newline = System.getProperty("line.separator");
 	public static String textHistory = ""; // history of text that cannot be erased next time
+	public static String currentWorkingDirectory = System.getProperty("user.dir"); // current working directory
 	public static ArrayList<String> commandHistory = new ArrayList<String>();
 	public static int historyLevel = 0;
 	public static  CaretListenerLabel caretListenerLabel = new CaretListenerLabel(); 
-     
 
 	public static void main(String[] args) throws IOException {
 		new Main();
@@ -47,6 +47,9 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 			arguments[i-1] = input[i];
 		
 		switch (token.kind) {
+			case Token.ATTRIB:
+				new Attrib(arguments);
+				break;
 			case Token.BIGGER:
 				break;
 			case Token.CAL:
@@ -55,8 +58,8 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 			case Token.CAT:
 				new Cat(arguments);
 				break;
-			case Token.ATTRIB:
-				new Attrib(arguments);
+			case Token.CD:
+				new Cd(arguments);
 				break;
 			case Token.CP:
 				new Cp(arguments);
@@ -122,7 +125,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 	}
      
 	public static void prompt() {
-		outln("PROMPT//>");
+		outln(currentWorkingDirectory + "\\> ");
 	}
  
      
