@@ -26,6 +26,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 		// set styling info
 		Font font = new Font("Courier New", Font.BOLD, 14);
 		typingArea.setFont(font);
+		typingArea.setLineWrap(true); 
 		typingArea.setForeground(Color.WHITE);
 		typingArea.setCaretColor(Color.WHITE);
 		typingArea.setBackground(Color.BLACK);
