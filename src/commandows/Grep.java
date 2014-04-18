@@ -50,13 +50,13 @@ public class Grep {
 	
 	public static String readFileToString(String fileName) throws IOException {
 		try {
-			@SuppressWarnings("resource")
 			RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
 			File file = new File(fileName);
 			byte[] fileBytes = new byte[(int)file.length()];
 			
 			// read data into bytes array
 			raf.read(fileBytes);
+			raf.close();
 			
 			// read data into string
 			return new String(fileBytes);

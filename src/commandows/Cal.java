@@ -1,5 +1,7 @@
 package commandows;
 
+import wandows.Main;
+
 public class Cal {
 	
 	private long current;
@@ -136,6 +138,6 @@ public class Cal {
 	}
 	
 	public void printCalendar() {
-		System.out.println(this.calendarOutput);
+		Main.outln(this.calendarOutput);
 	}
 }

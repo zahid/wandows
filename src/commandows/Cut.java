@@ -33,7 +33,7 @@ public class Cut {
 		try {
 			start = Integer.parseInt(range.substring(0, dashIndex));
 			end = Integer.parseInt(range.substring(dashIndex+1));
-			System.out.println(start + " " + end);
+			Main.outln(start + " " + end);
 		    in = new BufferedReader(new FileReader(filename));
 		    String line = "" ;
 		    while((line = in.readLine()) != null){

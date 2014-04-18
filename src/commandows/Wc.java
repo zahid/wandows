@@ -60,7 +60,6 @@ public class Wc {
 		if(file.exists() && !file.isDirectory()) {
 			try {
 				byte[] fileBytes = new byte[(int)file.length()];
-				@SuppressWarnings("resource")
 				RandomAccessFile raf = new RandomAccessFile(fileName, "r");
 	
 				// read data into bytes array and then convert to String
@@ -83,6 +82,7 @@ public class Wc {
 				}
 				
 				Main.out("\n" + "\t" + c1 + "\t" + c2 + "\t" + c3 + "\t" + fileName);
+				raf.close();
 			} catch (IOException e) {
 				System.err.println("Cannot read file: " + e);
 			}
