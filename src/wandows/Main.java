@@ -19,8 +19,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
      
 
 	public static void main(String[] args) throws IOException {
- 		Main gui = new Main();
-		caretListenerLabel.txtArea = typingArea;
+ 		caretListenerLabel.txtArea = typingArea;
 		typingArea.addCaretListener(caretListenerLabel);
 		
 		// set styling info
