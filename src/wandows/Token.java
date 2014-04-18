@@ -4,7 +4,7 @@ public class Token {
 
 	public Token(String spelling) {
 		kind = -1;
-		for (int k = BIGGER; k <= WC; k++)
+		for (int k = BIGGER; k <= CD; k++)
 			if (spelling.equals(spellings[k])) {
 				this.kind = (byte) k;
 				break;
@@ -41,5 +41,5 @@ public class Token {
 	private final static String[] spellings = { ">", "cal", "cat", "attrib",
 			"cp", "cut", "d", "echo", "exit", "file", "find", "grep", "head",
 			"link", "ls", "dir", "man", "mkdir", "mv", "pwd", "rm", "rmdir",
-			"tail", "u", "wc" };
+			"tail", "u", "wc", "cd"};
 }
