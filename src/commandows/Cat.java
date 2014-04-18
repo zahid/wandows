@@ -12,9 +12,10 @@ public class Cat {
 			String contents = "";
 			Scanner scanner = new Scanner(new File(file));
 			while(scanner.hasNext()) {
-				contents += scanner.nextLine();
+				contents += scanner.nextLine() + "\n";
 			}
 			Main.outln(contents);
+			scanner.close();
 		} catch(Exception e) {
 			Main.outln(e.getMessage());
 		}
