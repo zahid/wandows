@@ -9,8 +9,9 @@ public class Find {
     public Find(String[] args) {
     	String searchTerm = args[0];
     	
+    	Main.outln("Searching for `" + searchTerm + "`...");
         findRecursive("c:\\", searchTerm);
-        System.out.println("Search for `" + searchTerm + "` yielded " + matches + " results.");
+        Main.outln("Search for `" + searchTerm + "` yielded " + matches + " results.");
     }
     
     public static void findRecursive(String path, String searchTerm) {
