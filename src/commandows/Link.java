@@ -17,7 +17,7 @@ public class Link {// link C:/Users/Josh/Desktop/thing.txt C:/Users/Josh/Desktop
 		
 		// if file does not exist, give it a chance with the absolute path specified (since user may specify relative path instead)
 		if(!file.exists())
-			file = new File(System.getProperty("user.dir") + fileName);
+			file = new File(Main.currentWorkingDirectory + fileName);
 		
 		if(file.exists()) {
 			Path newLink = Paths.get(destination);

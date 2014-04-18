@@ -24,7 +24,7 @@ public class Mv {
 			
 			// if file does not exist, give it a chance with the absolute path specified (since user may specify relative path instead)
 			if(!file.exists())
-				file = new File(System.getProperty("user.dir") + fromFile);
+				file = new File(Main.currentWorkingDirectory + fromFile);
 			
 			if(file.exists() && !file.isDirectory()) {
 				fileBytes = new byte[(int)file.length()];
@@ -46,7 +46,7 @@ public class Mv {
 		
 		// if file does not exist, give it a chance with the absolute path specified (since user may specify relative path instead)
 		if(!file.exists())
-			file = new File(System.getProperty("user.dir") + fromFile);
+			file = new File(Main.currentWorkingDirectory + fromFile);
 		
 		if(!file.delete())
 			Main.outln("mv: `" + file.getAbsolutePath() + "`: could not delete file");

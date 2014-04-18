@@ -16,7 +16,7 @@ public class Grep {
 		
 		// if file does not exist, give it a chance with the absolute path specified (since user may specify relative path instead)
 		if(!file.exists())
-			file = new File(System.getProperty("user.dir") + args[1]);
+			file = new File(Main.currentWorkingDirectory + args[1]);
 		
 		if(file.exists()) {
 			// search file

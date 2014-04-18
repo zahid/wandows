@@ -9,9 +9,9 @@ public class File {
 		int index;
 		try {
 			index = args[0].indexOf(".");
-			Main.out(args[0].substring(index + 1) + " file type");
+			Main.outln(args[0].substring(index + 1) + " file type");
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			Main.out(e.getMessage());
 		}
 	}
 }
