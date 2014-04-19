@@ -8,7 +8,7 @@ public class Cd {
 		File f = new File(args[0]);
 		
 		if (f.exists() && f.isDirectory()) {
-			Main.currentWorkingDirectory = args[0];
+			Main.currentWorkingDirectory = args[0].replace("/", "\\");
 		}
 	}
 }
