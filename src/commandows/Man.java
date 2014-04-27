@@ -11,15 +11,19 @@ public class Man {
 		File cmdHelp = new File(System.getProperty("user.dir") + "/Manual/" + cmd + ".txt");
 			
 		if(cmdHelp.exists()) {
+			Main.setManualMode(true);
+			
 			Scanner sc = new Scanner(cmdHelp);
 			String str = "";
 			
 			while(sc.hasNextLine())
-				str += sc.nextLine();
+				str += sc.nextLine() + "\n";
 			
-			Main.outln(str);
+			str += "\nPress any key to quit";
+			
+			Main.setTypingAreaText(str);
 		} else {
-			Main.outln("Could not display help for: `" + cmd + "`");
+			Main.outln("No help available for `" + cmd + "`");
 		}
 	}
 }

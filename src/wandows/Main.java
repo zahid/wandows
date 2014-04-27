@@ -14,6 +14,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 	private static String currentWorkingDirectory = System.getProperty("user.dir"); // current working directory
 	private static ArrayList<String> commandHistory = new ArrayList<String>();
 	private static int historyLevel = 0;
+	private static boolean isManualMode = false;
 	private static JTextArea typingArea;
 	private static CaretListenerLabel caretListenerLabel = new CaretListenerLabel();
 	
@@ -114,6 +115,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 			case Token.DIR:
 				break;
 			case Token.MAN:
+				new Man(arguments[0]);
 				break;
 			case Token.MKDIR:
 				break;
@@ -144,12 +146,19 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 	}
 	 
 	private void prompt() {
-		outln(currentWorkingDirectory + "\\> ");
+		if(!isManualMode) outln(currentWorkingDirectory + "\\> ");
 	}
 	 
 	 
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
+		
+		// if terminal is in manual mode, quit the manual and reset
+		if(isManualMode) {
+			typingArea.setText(textHistory);
+			setManualMode(false);
+			return;
+		}
 		
 		if(typingArea.getCaretPosition() < CaretListenerLabel.uneditableMark+1) {
 			// cannot erase before character, disable backspace
@@ -235,6 +244,15 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 	
 	public static void setTypingAreaText(String s) {
 		typingArea.setText(s);
+	}
+	
+	public static boolean getManualMode() {
+		return isManualMode;
+	}
+	
+	public static void setManualMode(boolean mode) {
+		typingArea.setEditable((mode ? false : true));
+		isManualMode = mode;
 	}
 	   
 	/* unused KeyListener methods */
