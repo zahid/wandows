@@ -10,8 +10,6 @@ public class CaretListenerLabel extends JTextArea implements CaretListener {
 	public static boolean isRunning = false;
 
 	public void caretUpdate(CaretEvent e) {	
-	//	System.out.println("SelStart: " + txtArea.getSelectionStart() + ", SelEnd: " + txtArea.getSelectionEnd() + ", Caret: " + txtArea.getCaretPosition());
-		
 		if(txtArea.getCaretPosition() < uneditableMark && !isRunning) {
 			// past non-editable mark
 			if(txtArea.getSelectionStart() != txtArea.getSelectionEnd()) {

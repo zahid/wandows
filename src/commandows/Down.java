@@ -5,14 +5,14 @@ import wandows.Main;
 
 public class Down {
 	public Down() {
-		if(Main.commandHistory.size() >= Main.historyLevel && Main.historyLevel < Main.commandHistory.size()) {
-			Main.historyLevel++;
+		if(Main.getCommandHistory().size() >= Main.getHistoryLevel() && Main.getHistoryLevel() < Main.getCommandHistory().size()) {
+			Main.setHistoryLevel(Main.getHistoryLevel()+1);
 			
 	    	// prevent caret controls while the process is executing
 			CaretListenerLabel.isRunning = true;
 	    	
-			String updatedText = Main.textHistory+ Main.commandHistory.get(Main.historyLevel-1);
-			Main.typingArea.setText(updatedText);
+			String updatedText = Main.getTextHistory() + Main.getCommandHistory().get(Main.getHistoryLevel()-1);
+			Main.setTypingAreaText(updatedText);
 			
 			// prevent caret controls while the process is executing
 			CaretListenerLabel.isRunning = false;

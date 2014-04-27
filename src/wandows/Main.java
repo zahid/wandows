@@ -10,20 +10,56 @@ import javax.swing.*;
 import commandows.*;
  
 public class Main extends JFrame implements KeyListener, ActionListener {
-	public static JTextArea typingArea;
-	static final String newline = System.getProperty("line.separator");
-	public static String textHistory = ""; // history of text that cannot be erased next time
-	public static String currentWorkingDirectory = System.getProperty("user.dir"); // current working directory
-	public static ArrayList<String> commandHistory = new ArrayList<String>();
-	public static int historyLevel = 0;
-	public static  CaretListenerLabel caretListenerLabel = new CaretListenerLabel(); 
-
-	public static void main(String[] args) throws IOException {
-		new Main();
- 		caretListenerLabel.txtArea = typingArea;
+	private static String textHistory = ""; // history of text that cannot be erased next prompt()
+	private static String currentWorkingDirectory = System.getProperty("user.dir"); // current working directory
+	private static ArrayList<String> commandHistory = new ArrayList<String>();
+	private static int historyLevel = 0;
+	private static JTextArea typingArea;
+	private static CaretListenerLabel caretListenerLabel = new CaretListenerLabel();
+	
+	public Main() {
+		// create and set up the window
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.addComponentsToPane();
+		this.pack();
+		this.setVisible(true);
+	}
+	
+	public static ArrayList<String> getCommandHistory() {
+		return commandHistory;
+	}
+	
+	public static int getHistoryLevel() {
+		return historyLevel;
+	}
+	
+	public static String getTextHistory() {
+		return textHistory;
+	}
+	
+	public static String getCurrentWorkingDirectory() {
+		return currentWorkingDirectory;
+	}
+	
+	public static void setTypingAreaText(String s) {
+		typingArea.setText(s);
+	}
+	
+	public static void setCurrentWorkingDirectory(String s) {
+		currentWorkingDirectory = s;
+	}
+	
+	public static void setHistoryLevel(int n) {
+		historyLevel = n;
+	}
+	
+	private void addComponentsToPane() {
+		typingArea = new JTextArea();
+		typingArea.addKeyListener(this);
+		caretListenerLabel.txtArea = typingArea;
 		typingArea.addCaretListener(caretListenerLabel);
 		
-		// set styling info
+		// set textarea/terminal styling info
 		Font font = new Font("Courier New", Font.BOLD, 14);
 		typingArea.setFont(font);
 		typingArea.setLineWrap(true); 
@@ -32,12 +68,23 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 		typingArea.setBackground(Color.BLACK);
 		typingArea.putClientProperty("caretWidth", 8);
 		typingArea.putClientProperty("caretColor", 8);
+		   
+		JScrollPane scrollPane = new JScrollPane(typingArea);
+		scrollPane.setPreferredSize(new Dimension(650, 300));
+		
+		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		   
+		prompt();
 	}
-     
-	public static void runCommand(String cmd) throws IOException {
-	 	if(commandHistory.add(cmd.trim()))
+	   
+	public static void main(String[] args) throws IOException {
+		new Main();
+	}
+	 
+	private void runCommand(String cmd) throws IOException {
+		if(commandHistory.add(cmd.trim()))
 			historyLevel++;
-	 	
+		 
 		String[] input = cmd.trim().split(" ");
 		String[] arguments = new String[input.length-1];
 		String command = input[0];
@@ -120,107 +167,81 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				System.out.println(command);
 				outln("`" + command + "` is not recognized as an internal or external command, operable program or batch file.");
 		}
-		
+	
 		prompt();
 	}
-     
-	public static void prompt() {
+	 
+	private void prompt() {
 		outln(currentWorkingDirectory + "\\> ");
 	}
- 
-     
-    public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-    	
-        if(typingArea.getCaretPosition() < CaretListenerLabel.uneditableMark+1) {
-        	// cannot erase before character, disable backspace
-        	typingArea.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
-        } else if(keyCode == 10) {
-        	// enter key pressed, find and run command
-        	String command = typingArea.getText().substring(CaretListenerLabel.uneditableMark, typingArea.getText().length());
-        	
-        	// execute the command
-        	try {
+	 
+	 
+	public void keyPressed(KeyEvent e) {
+		int keyCode = e.getKeyCode();
+		
+		if(typingArea.getCaretPosition() < CaretListenerLabel.uneditableMark+1) {
+			// cannot erase before character, disable backspace
+			typingArea.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
+		} else if(keyCode == 10) {
+			// enter key pressed, find and run command
+			String command = typingArea.getText().substring(CaretListenerLabel.uneditableMark, typingArea.getText().length());
+			
+			// execute the command
+			try {
 				runCommand(command);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-        } else {
-        	// re-enable backspace
-        	typingArea.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), null);
-        }
-        
-        /* directional arrow key events */
-        if(keyCode == 38) {
-        	// up arrow
-        	new Up();
-        } else if(keyCode == 40) {
-        	// down arrow
-        	new Down();
-        } 
+		} else {
+			// re-enable backspace
+			typingArea.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), null);
+		}
+	
+		/* directional arrow key events */
+		if(keyCode == 38) {
+			// up arrow
+			new Up();
+		} else if(keyCode == 40) {
+			// down arrow
+			new Down();
+		} 
 	}
-    
-	/* prints without a line break */
-	public static void out(String text) {
+	
+	/* prints with or without out a line break */
+	private static void printStr(String text, boolean withLineBreak) {
 		// prevent caret controls while the process is executing
 		CaretListenerLabel.isRunning = true;
-		
+	
 		// add the text to the uneditable history
-		String updatedText = typingArea.getText() + text;
+		String updatedText = typingArea.getText() + (withLineBreak ? "\n" : "") + text;
+		updatedText = updatedText.trim();
+	
+		// update the text
 		typingArea.setText(updatedText);
 		textHistory = updatedText;
 		CaretListenerLabel.uneditableMark = textHistory.length();
-		
+	
 		// re-enable caret controls
 		CaretListenerLabel.isRunning = false;
+		typingArea.setCaretPosition(CaretListenerLabel.uneditableMark);
 	}
-    
-    /* prints with a line break */
-	public static void outln(String text) {
-		// prevent caret controls while the process is executing
-		CaretListenerLabel.isRunning = true;
-    	
-    	// add the text to the uneditable history
-    	String updatedText = typingArea.getText() + "\n" + text;
-    	updatedText = updatedText.trim();
-    	
-    	// update the text
-    	typingArea.setText(updatedText);
-    	textHistory = updatedText;
-    	CaretListenerLabel.uneditableMark = textHistory.length();
-    	
-    	// re-enable caret controls
-    	CaretListenerLabel.isRunning = false;
-    	typingArea.setCaretPosition(CaretListenerLabel.uneditableMark);
-	}
-    
-   private void addComponentsToPane() {
-       typingArea = new JTextArea();
-       typingArea.addKeyListener(this);
-       
-       JScrollPane scrollPane = new JScrollPane(typingArea);
-       scrollPane.setPreferredSize(new Dimension(650, 300));
-        
-       getContentPane().add(scrollPane, BorderLayout.CENTER);
-       
-       prompt();
-   }
-   
-   public Main() {
-       // create and set up the window
-	   this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	   this.addComponentsToPane();
-	   this.pack();
-	   this.setVisible(true);
-   }
-     
-   
-   /* unused methods */
-    public void keyReleased(KeyEvent e) { }
-    
-    public void keyTyped(KeyEvent e) { }
 
-    public void actionPerformed(ActionEvent e) {
-        typingArea.requestFocusInWindow();
-    }
+	/* prints without a line break */
+	public static void out(String text) {
+		printStr(text, false);
+	}
+
+	/* prints with a line break */
+	public static void outln(String text) {
+		printStr(text, true);
+	}
+	   
+	/* unused KeyListener methods */
+	public void keyReleased(KeyEvent e) { }
+	
+	public void keyTyped(KeyEvent e) { }
+	
+	public void actionPerformed(ActionEvent e) {
+		typingArea.requestFocusInWindow();
+	}
 }

@@ -3,14 +3,14 @@ import wandows.*;
 
 public class Up {
 	public Up() {
-		if(Main.commandHistory.size() >= Main.historyLevel && Main.historyLevel > 0) {
-				Main.historyLevel--;
+		if(Main.getCommandHistory().size() >= Main.getHistoryLevel() && Main.getHistoryLevel() > 0) {
+				Main.setHistoryLevel(Main.getHistoryLevel()-1);
 				
 		    	// prevent caret controls while the process is executing
 				CaretListenerLabel.isRunning = true;
 		    	
-				String updatedText = Main.textHistory+ Main.commandHistory.get(Main.historyLevel);
-				Main.typingArea.setText(updatedText);
+				String updatedText = Main.getTextHistory() + Main.getCommandHistory().get(Main.getHistoryLevel());
+				Main.setTypingAreaText(updatedText);
 				
 				// prevent caret controls while the process is executing
 				CaretListenerLabel.isRunning = false;

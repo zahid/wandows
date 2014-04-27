@@ -55,7 +55,7 @@ public class Wc {
 		
 		// if file does not exist, give it a chance with the absolute path specified (since user may specify relative path instead)
 		if(!file.exists())
-			file = new File(Main.currentWorkingDirectory + fileName);
+			file = new File(Main.getCurrentWorkingDirectory() + fileName);
 		
 		if(file.exists() && !file.isDirectory()) {
 			try {
