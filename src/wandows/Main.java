@@ -25,34 +25,6 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 		this.setVisible(true);
 	}
 	
-	public static ArrayList<String> getCommandHistory() {
-		return commandHistory;
-	}
-	
-	public static int getHistoryLevel() {
-		return historyLevel;
-	}
-	
-	public static String getTextHistory() {
-		return textHistory;
-	}
-	
-	public static String getCurrentWorkingDirectory() {
-		return currentWorkingDirectory;
-	}
-	
-	public static void setTypingAreaText(String s) {
-		typingArea.setText(s);
-	}
-	
-	public static void setCurrentWorkingDirectory(String s) {
-		currentWorkingDirectory = s;
-	}
-	
-	public static void setHistoryLevel(int n) {
-		historyLevel = n;
-	}
-	
 	private void addComponentsToPane() {
 		typingArea = new JTextArea();
 		typingArea.addKeyListener(this);
@@ -234,6 +206,35 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 	/* prints with a line break */
 	public static void outln(String text) {
 		printStr(text, true);
+	}
+	
+	/* getters and setters */
+	public static int getHistoryLevel() {
+		return historyLevel;
+	}
+	
+	public static void setHistoryLevel(int n) {
+		historyLevel = n;
+	}
+	
+	public static String getCurrentWorkingDirectory() {
+		return currentWorkingDirectory;
+	}
+	
+	public static void setCurrentWorkingDirectory(String s) {
+		currentWorkingDirectory = s;
+	}
+	
+	public static ArrayList<String> getCommandHistory() {
+		return commandHistory;
+	}
+	
+	public static String getTextHistory() {
+		return textHistory;
+	}
+	
+	public static void setTypingAreaText(String s) {
+		typingArea.setText(s);
 	}
 	   
 	/* unused KeyListener methods */
