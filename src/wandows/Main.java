@@ -43,6 +43,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 		typingArea.putClientProperty("caretColor", 8);
 		   
 		JScrollPane scrollPane = new JScrollPane(typingArea);
+		scrollPane.setBorder(null);
 		scrollPane.setPreferredSize(new Dimension(650, 300));
 		
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
