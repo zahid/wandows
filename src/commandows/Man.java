@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Man {
 	public Man(String cmd) throws FileNotFoundException {
 		cmd = Character.toUpperCase(cmd.charAt(0)) + cmd.substring(1).toLowerCase();
-		File cmdHelp = new File(System.getProperty("user.dir") + "/Manual/" + cmd + ".txt");
+		File cmdHelp = new File(System.getProperty("user.dir") + "/Manual/" + cmd.trim() + ".txt");
 			
 		if(cmdHelp.exists()) {
 			Main.setManualMode(true);
