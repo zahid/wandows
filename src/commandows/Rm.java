@@ -18,19 +18,18 @@ public class Rm {
 			
 			if(!dir.equals(Main.getCurrentWorkingDirectory()))
 				dir = Main.getCurrentWorkingDirectory();
+			file = new File(dir + "\\" + fname);
 			
-			if(!file.exists() && !file.isDirectory()) {
-				file = new File(dir + "\\" + fname);
-				
-				// if it doesn't exist, throw an error
-				if(file.exists() && !file.isDirectory())
-					file.delete();
+			if(file.exists() && !file.isDirectory()) {
+				// if it doesn't exist throw an error
+				if(file.list().length > 0)
+					Main.outln("rm: `" + file.getCanonicalFile() + "`: file not empty");
 				else
-					Main.outln("rmdir: `" + file.getCanonicalFile() + "`: file not found or is a directory");
+					file.delete();
 			} else
-				Main.outln("rmdir: `" + file.getCanonicalFile() + "`: file not found or is a directory");
+				Main.outln("rm: `" + file.getCanonicalFile() + "`: file not found or is a directory");
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			Main.outln("rm: `" + e.getMessage());
 		}
 	}
 }
