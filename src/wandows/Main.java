@@ -1,6 +1,5 @@
 package wandows;
 import java.awt.BorderLayout;
-import java.io.File;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -109,7 +108,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				System.exit(0);
 				break;
 			case Token.FILE:
-			//	new File(arguments);
+				new File(arguments);
 				break;
 			case Token.FIND:
 				new Find(arguments);
@@ -124,7 +123,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				new Link(arguments);
 				break;
 			case Token.LS:
-				new Dir(arguments);
+				new Ls(arguments);
 				break;
 			case Token.DIR:
 				new Dir(arguments);
