@@ -1,0 +1,29 @@
+NAME
+	Bigger (>)
+	
+DESCRIPTION
+	The greater than (>) character sends the output of an executable to a file
+	instead of putting it on the screen. This is called output redirection.
+	
+EXAMPLE
+	a.out > output1
+	  OR
+	g++ file.cpp >& output_and_errors
+	  OR
+	a.out >> output1
+	
+	The greater than (>) character sends the output of an executable to a file instead of putting it on the screen.
+	This is called output redirection. For example, if the executable a.out above normally prints out "Hello, world!"
+	on the screen, then the first example would cause nothing to appear on the screen, but instead, "Hello, world!"
+	would be found in the file output1.
+
+	Some output from programs is meant as error messages. Sometimes these will not be redirected by greater than (>).
+	To redirect both regular and error output to a file, use the ampersand after the greater than symbol (i.e., >&),
+	as in the second example.
+
+	When you use output redirection, the first thing UNIX does is to create (or clear out, if it exists) the output file
+	(e.g., output1 and output_and_errors in our examples). Be careful with this, since if you try to do something like:
+
+		cat a b c > a
+		
+	You may run into problems since a gets cleared out (the "> a" part) before it is used (the "cat a b c" part).
