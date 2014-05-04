@@ -19,14 +19,16 @@ public class Rmdir {
 			if(!dir.equals(Main.getCurrentWorkingDirectory()))
 				dir = Main.getCurrentWorkingDirectory();
 			
-			if(!directory.exists()) {
+			if(!directory.exists() && directory.isDirectory()) {
 				directory = new File(dir + "\\" + fname);
 				
 				// if it doesn't exist, throw an error
-				if(directory.exists())
-					directory.delete();
-				else
+				if(!directory.empty())
 					Main.outln("rmdir: `" + directory.getCanonicalFile() + "`: file not found or is not a directory");
+				else if(!directory.exists())
+					Main.outln("rmdir: `" + directory.getCanonicalFile() + "`: file not found or is not a directory");
+				else
+					directory.delete();
 			} else
 				Main.outln("rmdir: `" + directory.getCanonicalFile() + "`: file not found or is not a directory");
 		} catch (Exception e) {
