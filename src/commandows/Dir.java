@@ -10,7 +10,7 @@ import wandows.Main;
 public class Dir {
 	public Dir(String[] args) throws IOException {
 		String directory;
-		int dirCount = 0, fileCount = 0, totalBytes = 0;
+		int dirCount = 0, fileCount = 0;
 		long totalFileBytes = 0, totalDirBytes = 0;
 		
 		if(args.length > 0)
