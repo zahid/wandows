@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -254,8 +255,20 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 		return currentWorkingDirectory;
 	}
 	
-	public static void setCurrentWorkingDirectory(String s) {
-		currentWorkingDirectory = s;
+	public static void setCurrentWorkingDirectory(String s) throws IOException {
+		File f = new File(s);
+		
+		if(!f.exists()) {
+			f = new File(currentWorkingDirectory + "\\" + s);
+			
+			if(f.exists() && f.isDirectory())
+				currentWorkingDirectory = f.getCanonicalPath();
+			else {
+				outln("`" + f.getCanonicalPath() + "`: cannot find path specified or is not a directory.");
+				return;
+			}
+		} else
+			currentWorkingDirectory = f.getCanonicalPath();
 	}
 	
 	public static ArrayList<String> getCommandHistory() {
