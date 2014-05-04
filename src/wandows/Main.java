@@ -141,6 +141,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				new Pwd();
 				break;
 			case Token.RM:
+				new Rm(arguments);
 				break;
 			case Token.RMDIR:
 				break;
