@@ -1,1 +1,23 @@
-help file for attrib
+NAME
+  ATTRIB - Displays or sets file attributes
+  
+DESCRIPTION
+  Displays, sets, or removes the read-only, archive, system, and hidden attributes assigned to files or directories. Used without parameters, attrib displays attributes of all files in the current directory.
+
+Syntax
+      ATTRIB [ + attribute | - attribute ] [pathname] [/S [/D]]
+
+Key
+     +    : Turn an attribute ON
+     -    : Clear an attribute OFF
+
+ pathname : Drive and/or filename e.g. C:\*.txt
+    /S    : Search the pathname including all subfolders.
+    /D    : Process folders as well
+
+   attributes: 
+
+        R  Read-only (1)
+        H  Hidden (2)
+        A  Archive (32)
+        S  System (4)
