@@ -101,8 +101,6 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 			case Token.CUT:
 				new Cut(arguments);
 				break;
-			case Token.D:
-				break;
 			case Token.ECHO:
 				new Echo(arguments);
 				break;
@@ -125,8 +123,10 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				new Link(arguments);
 				break;
 			case Token.LS:
+				new Dir(arguments);
 				break;
 			case Token.DIR:
+				new Dir(arguments);
 				break;
 			case Token.MAN:
 				new Man(arguments[0]);
