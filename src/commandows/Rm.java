@@ -23,7 +23,7 @@ public class Rm {
 				file = new File(dir + "\\" + fname);
 				
 				// if it doesn't exist, throw an error
-				if(file.exists())
+				if(file.exists() && !file.isDirectory())
 					file.delete();
 				else
 					Main.outln("rmdir: `" + file.getCanonicalFile() + "`: file not found or is a directory");
