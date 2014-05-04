@@ -13,7 +13,8 @@ import commandows.*;
 public class Main extends JFrame implements KeyListener, ActionListener {
 	private static Bigger bigger;
 	private static String textHistory = ""; // history of text that cannot be erased next prompt()
-	private static String currentWorkingDirectory = "C:/Users/Josh/Desktop/";//System.getProperty("user.dir"); // current working directory
+//	private static String currentWorkingDirectory = "C:/Users/Josh/Desktop/";//System.getProperty("user.dir"); // current working directory
+	private static String currentWorkingDirectory = System.getProperty("user.dir"); // current working directory
 	private static ArrayList<String> commandHistory = new ArrayList<String>();
 	private static int historyLevel = 0;
 	private static boolean isManualMode = false;
@@ -132,6 +133,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				new Man(arguments[0]);
 				break;
 			case Token.MKDIR:
+				new Mkdir(arguments);
 				break;
 			case Token.MV:
 				new Mv(arguments);
