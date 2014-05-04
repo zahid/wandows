@@ -23,7 +23,7 @@ public class Rmdir {
 				directory = new File(dir + "\\" + fname);
 				
 				// if it doesn't exist, throw an error
-				if(!directory.empty())
+				if(directory.list().length > 0){
 					Main.outln("rmdir: `" + directory.getCanonicalFile() + "`: file not found or is not a directory");
 				else if(!directory.exists())
 					Main.outln("rmdir: `" + directory.getCanonicalFile() + "`: file not found or is not a directory");
