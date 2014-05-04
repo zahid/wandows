@@ -123,7 +123,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				new Link(arguments);
 				break;
 			case Token.LS:
-				new Dir(arguments);
+				new Ls(arguments);
 				break;
 			case Token.DIR:
 				new Dir(arguments);

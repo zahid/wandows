@@ -16,7 +16,13 @@ public class Ls {
 		File file = new File(directory);
 
 		if(file.exists() && file.isDirectory()) {
-			System.out.println("is directory");
+			File[] files = file.listFiles();
+			String strLine = "";
+			
+			for (File f : files)
+				strLine += f.getName() + "\t";
+			
+			Main.outln(strLine);
 		} else {
 			System.out.println("not a directory");
 		}
