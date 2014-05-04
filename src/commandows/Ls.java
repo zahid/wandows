@@ -24,7 +24,7 @@ public class Ls {
 			
 			Main.outln(strLine);
 		} else {
-			System.out.println("not a directory");
+			System.out.println("ls: `" + directory + "`: not a directory");
 		}
 	}
 }

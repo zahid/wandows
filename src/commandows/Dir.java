@@ -52,7 +52,7 @@ public class Dir {
 			Main.outln("\t" + fileCount + " File(s)\t" + totalFileBytes + " bytes");
 			Main.outln("\t" + dirCount + " Dir(s)\t" + totalDirBytes + " bytes free");
 		} else {
-			Main.outln("not a directory");
+			System.out.println("dir: `" + directory + "`: not a directory");
 		}
 	}
 }
