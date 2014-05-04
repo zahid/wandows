@@ -108,7 +108,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 				System.exit(0);
 				break;
 			case Token.FILE:
-				new File(arguments);
+				new File2(arguments);
 				break;
 			case Token.FIND:
 				new Find(arguments);
