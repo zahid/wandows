@@ -1,1 +1,16 @@
-help file for attrib
+NAME
+	attrib
+
+DESCRIPTION
+	Displays, sets, or removes the read-only, archive, system, and hidden attributes 
+	assigned to files or directories. Used without parameters, attrib displays
+	attributes of all files in the current directory.
+	
+PARAMETERS
+	-r		Sets the read-only file attribute.
+	
+	-a		Sets the archive file attribute.
+	
+	-s		Sets the system file attribute.
+	
+	-h		Sets the hidden file attribute.

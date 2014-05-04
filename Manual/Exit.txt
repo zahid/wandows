@@ -45,10 +45,7 @@ NOTES
 
        If the exit of the process causes a process group to become orphaned, and if any member of the newly orphaned process group is stopped, then a SIGHUP signal followed by a SIGCONT signal will  be
        sent to each process in this process group.  See setpgid(2) for an explanation of orphaned process groups.
-
-SEE ALSO
-       _exit(2), setpgid(2), wait(2), atexit(3), on_exit(3), tmpfile(3)
-
+	   
 COLOPHON
        This page is part of release 3.54 of the Linux man-pages project.  A description of the project, and information about reporting bugs, can be found at http://www.kernel.org/doc/man-pages/.
 
