@@ -21,6 +21,7 @@ public class Head {
 				int i = 0;
 			    while((line = in.readLine()) != null && i < 10){
 			    	Main.outln(line);
+			    	i++;
 			    }
 			} catch (Exception e) {
 				Main.outln(e.getMessage());
