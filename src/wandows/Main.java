@@ -211,7 +211,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 	private static void printStr(String text, boolean withLineBreak) {
 		if(printToFile) {
 			/* print to file instead of to console (from (>) command) */
-			bigger.appendToFile(text, withLineBreak);
+			bigger.append(text, withLineBreak);
 		} else {
 			/* print to console */
 			// prevent caret controls while the process is executing

@@ -1,7 +1,5 @@
 package commandows;
 
-import java.io.File;
-
 import wandows.Main;
 
 public class Mkdir {
@@ -12,10 +10,10 @@ public class Mkdir {
 				return;
 			}
 			
-			File directory = new File(Main.getCurrentWorkingDirectory() + "\\" + args[0]);
+			WandowsFile directory = new WandowsFile(args[0]);
 			
 			if(directory.exists())
-				Main.outln("mkdir: `" + directory.getCanonicalFile() + "`: directory already exists");
+				Main.outln("mkdir: `" + directory.getPath() + "`: directory already exists");
 			else
 				directory.mkdir();
 		} catch (Exception e) {
